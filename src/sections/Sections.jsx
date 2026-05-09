@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useInView, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import {
   ArrowRight, Award, BarChart2, Briefcase, Download,
-  Eye, Layers, Linkedin, Mail, MessageCircle, PlayCircle,
-  Target, TrendingUp, Users, Zap,
+  Eye, ExternalLink, GraduationCap, Layers, Linkedin,
+  Mail, MessageCircle, PlayCircle, Shield, Target,
+  TrendingUp, Users, X, Zap,
 } from "lucide-react";
 import { AnimatedSection } from "../components/AnimatedSection";
 import {
-  caseStudies, expertise, insights, leadership,
+  caseStudies, credentials, expertise, insights, leadership,
   metrics, testimonials, timeline, tools, trustBrands,
 } from "../data/content";
 import profileImage from "../../Morshed.jpg.jpeg";
@@ -591,6 +592,153 @@ export function Insights() {
           </motion.div>
         ))}
       </motion.div>
+    </AnimatedSection>
+  );
+}
+
+/* ══════════════════════════════════
+   CREDENTIALS
+══════════════════════════════════ */
+const categoryColors = {
+  Education:     "text-sky-400 bg-sky-400/10 border-sky-400/20",
+  Language:      "text-emerald-400 bg-emerald-400/10 border-emerald-400/20",
+  Technology:    "text-violet-400 bg-violet-400/10 border-violet-400/20",
+  Communication: "text-amber-400 bg-amber-400/10 border-amber-400/20",
+  Professional:  "text-rose-400 bg-rose-400/10 border-rose-400/20",
+};
+
+const categoryIcons = {
+  Education:     GraduationCap,
+  Language:      Eye,
+  Technology:    Shield,
+  Communication: Zap,
+  Professional:  Award,
+};
+
+export function Credentials() {
+  const [active, setActive] = useState(null);
+
+  return (
+    <AnimatedSection
+      id="credentials"
+      label="Verified Credentials"
+      title="Education & Certifications"
+      subtitle="Real certified proof — click any card to view the original certificate."
+    >
+      <motion.div
+        variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {credentials.map((cred) => {
+          const Icon = categoryIcons[cred.category] || Award;
+          const colorClass = categoryColors[cred.category] || "text-accent-gold bg-accent-gold/10 border-accent-gold/20";
+          return (
+            <motion.div
+              key={cred.id}
+              variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } }}
+            >
+              <button
+                type="button"
+                onClick={() => setActive(cred)}
+                className="group relative w-full cursor-pointer rounded-2xl border border-white/10 bg-white/[0.025] p-5 text-left shadow-soft transition-all duration-500 hover:-translate-y-1 hover:border-accent-gold/40 hover:bg-white/[0.05]"
+              >
+                {/* gradient ring on hover */}
+                <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 ring-1 ring-inset ring-accent-gold/25 transition-opacity duration-500 group-hover:opacity-100" />
+
+                {/* top row */}
+                <div className="mb-4 flex items-start justify-between gap-3">
+                  <div className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border ${colorClass}`}>
+                    <Icon size={17} />
+                  </div>
+                  <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest ${colorClass}`}>
+                    {cred.category}
+                  </span>
+                </div>
+
+                {/* cert thumbnail */}
+                <div className="mb-4 overflow-hidden rounded-xl border border-white/10">
+                  <img
+                    src={cred.file}
+                    alt={cred.title}
+                    className="h-36 w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+
+                <h3 className="text-sm font-bold text-white">{cred.title}</h3>
+                <p className="mt-0.5 text-xs font-medium text-accent-smoke">{cred.subtitle}</p>
+                <p className="mt-1 text-xs text-white/40">{cred.issuer}</p>
+
+                <div className="mt-3 flex items-center justify-between">
+                  <span className="text-[11px] text-white/30">{cred.date}</span>
+                  <span className="flex items-center gap-1 text-[11px] font-medium text-accent-gold opacity-0 transition-opacity group-hover:opacity-100">
+                    View full <ExternalLink size={11} />
+                  </span>
+                </div>
+              </button>
+            </motion.div>
+          );
+        })}
+      </motion.div>
+
+      {/* ── Lightbox ── */}
+      <AnimatePresence>
+        {active && (
+          <motion.div
+            key="lightbox-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setActive(null)}
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+          >
+            <motion.div
+              key="lightbox-modal"
+              initial={{ opacity: 0, scale: 0.93, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.93, y: 20 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-h-[92vh] w-full max-w-2xl overflow-auto rounded-2xl border border-white/15 bg-base-900 shadow-[0_32px_80px_rgba(0,0,0,0.6)]"
+            >
+              {/* close */}
+              <button
+                type="button"
+                onClick={() => setActive(null)}
+                className="absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-base-950/80 text-white/70 backdrop-blur transition hover:border-accent-gold hover:text-accent-gold"
+                aria-label="Close"
+              >
+                <X size={15} />
+              </button>
+
+              {/* certificate image */}
+              <img
+                src={active.file}
+                alt={active.title}
+                className="w-full rounded-t-2xl object-contain"
+                loading="eager"
+              />
+
+              {/* meta */}
+              <div className="border-t border-white/10 p-5">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-accent-gold">{active.category}</p>
+                    <h3 className="mt-1 text-lg font-bold text-white">{active.title}</h3>
+                    <p className="text-sm text-accent-smoke">{active.subtitle}</p>
+                    <p className="mt-1 text-xs text-white/40">{active.issuer} · {active.date}</p>
+                    <p className="mt-2 text-xs text-white/55">{active.detail}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </AnimatedSection>
   );
 }

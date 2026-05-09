@@ -9,6 +9,7 @@ import {
   About,
   CaseStudies,
   Contact,
+  Credentials,
   Expertise,
   Experience,
   Gallery,
@@ -54,6 +55,8 @@ export default function App() {
         <CaseStudies />
         <Divider />
         <Leadership />
+        <Divider />
+        <Credentials />
         <Divider />
         <Testimonials />
         <Divider />

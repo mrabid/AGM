@@ -3,7 +3,7 @@ export const navItems = [
   "Expertise",
   "Experience",
   "Case Studies",
-  "Leadership",
+  "Credentials",
   "Insights",
   "Contact",
 ];
@@ -128,6 +128,59 @@ export const insights = [
   "Leadership frameworks for high-performing marketing teams",
   "Consumer behavior shifts in hospitality branding",
   "From campaign outputs to business-level growth systems",
+];
+
+export const credentials = [
+  {
+    id: "bba",
+    title: "Bachelor of Business Administration",
+    subtitle: "Human Resource Management",
+    issuer: "Royal University of Dhaka",
+    date: "January 30, 2022",
+    detail: "CGPA 3.71 / 4.00",
+    category: "Education",
+    file: "/academic/certificate.jpg",
+  },
+  {
+    id: "ielts",
+    title: "IELTS Academic",
+    subtitle: "Overall Band Score 6.5 · CEFR Level B2",
+    issuer: "British Council · IDP · Cambridge Assessment",
+    date: "October 2022",
+    detail: "Listening 7.0 · Reading 6.5 · Writing 6.0 · Speaking 6.0",
+    category: "Language",
+    file: "/academic/IELTS.jpg",
+  },
+  {
+    id: "comptia",
+    title: "CompTIA A+ Certification",
+    subtitle: "Computer Hardware & Networking",
+    issuer: "New Horizons Computer Learning Centers",
+    date: "July 23, 2013",
+    detail: "Course Duration: 80 Hours · International Recognition",
+    category: "Technology",
+    file: "/academic/COMPTIA.jpg",
+  },
+  {
+    id: "vce",
+    title: "Verbal Communication in English",
+    subtitle: "Achieved Grade: A",
+    issuer: "WSDA New Zealand · SEIP · BACCO",
+    date: "2019",
+    detail: "Workplace Skills Development Academy — Professional Communication",
+    category: "Communication",
+    file: "/academic/VCE.jpg",
+  },
+  {
+    id: "pcs",
+    title: "Professional Customer Service",
+    subtitle: "Units of Competency — BACCO Certified",
+    issuer: "Bangladesh Association of Call Center & Outsourcing",
+    date: "2019",
+    detail: "Contact centre management, BPO operations, customer service excellence",
+    category: "Professional",
+    file: "/academic/PCS Back Page.jpg",
+  },
 ];
 
 export const tools = [
