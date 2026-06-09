@@ -1,133 +1,133 @@
 export const navItems = [
   "About",
-  "Expertise",
-  "Experience",
+  "Services",
+  "Industries",
+  "How I Work",
   "Case Studies",
-  "Credentials",
-  "Insights",
+  "Expertise",
   "Contact",
 ];
 
 export const trustBrands = [
-  "Chuti Group",
-  "Amena Group",
   "Hospitality Brands",
   "Real Estate Ventures",
-  "Growth Teams",
-  "Executive Boards",
+  "Tourism Companies",
+  "Lifestyle Brands",
+  "Startups & SMEs",
+  "Growth-focused Businesses",
 ];
 
 export const expertise = [
-  "Brand Strategy",
+  "Marketing Strategy",
   "Digital Marketing",
-  "Campaign Leadership",
-  "Consumer Psychology",
-  "Growth Strategy",
-  "Performance Marketing",
-  "Team Leadership",
-  "Creative Direction",
-  "Brand Positioning",
-  "Market Expansion",
+  "Social Media Marketing",
+  "Business Development",
+  "Brand Strategy",
+  "Content Marketing",
+  "Lead Generation",
+  "Hospitality Marketing",
+  "Real Estate Marketing",
+  "Customer Experience",
+  "Event Marketing",
+  "Strategic Partnerships",
 ];
 
 export const timeline = [
   {
-    company: "Chuti Group",
-    role: "Assistant General Manager — Branding & Marketing",
-    duration: "Jan 2026 - Present",
+    company: "Business Growth Strategy",
+    role: "Marketing & Growth Consultant",
+    duration: "Ongoing",
     achievements: [
-      "Led multi-brand marketing planning across hospitality and real estate projects.",
-      "Built cross-functional campaign systems aligned with business growth targets.",
-      "Strengthened leadership communication between teams, stakeholders, and executives.",
+      "Help businesses identify growth opportunities and create data-driven strategies.",
+      "Develop integrated marketing campaigns that generate leads and drive conversions.",
+      "Guide businesses through hospitality, real estate, and brand positioning challenges.",
     ],
   },
   {
-    company: "Chuti Group",
-    role: "Manager — Branding & Business Development",
-    duration: "Mar 2024 - Jan 2026",
+    company: "Hospitality & Resort Projects",
+    role: "Marketing Lead",
+    duration: "Multiple engagements",
     achievements: [
-      "Directed ATL, BTL, and digital campaigns for multiple properties.",
-      "Improved lead quality strategy through audience segmentation and media planning.",
-      "Mentored marketing teams with a modern performance-first operating model.",
+      "Increased booking rates and occupancy through targeted positioning strategies.",
+      "Executed integrated marketing campaigns across digital, social, and traditional channels.",
+      "Built brand awareness and guest engagement for competitive hospitality markets.",
     ],
   },
   {
-    company: "Amena Group",
-    role: "Assistant Manager",
-    duration: "Aug 2019 - Jun 2023",
+    company: "Real Estate & Property Development",
+    role: "Project Marketing Strategy",
+    duration: "Multiple projects",
     achievements: [
-      "Handled marketing execution with HR and operations alignment.",
-      "Supported regulatory, partner, and internal process coordination.",
-      "Contributed to scale-ready systems across business units.",
+      "Generated quality leads and investor interest through strategic positioning.",
+      "Improved project visibility and market positioning for launches.",
+      "Developed comprehensive go-to-market strategies for residential and commercial projects.",
     ],
   },
 ];
 
 export const caseStudies = [
   {
-    title: "Hospitality Brand Repositioning",
-    challenge: "Low premium perception in a competitive local market.",
-    strategy: "Refined brand narrative, segmented audience framework, and cross-channel media planning.",
-    execution: "Campaign architecture across digital, content, and activation touchpoints.",
-    outcome: "Placeholder for occupancy lift, lead quality, and engagement data.",
+    title: "Resort Destination Marketing",
+    challenge: "Increase brand visibility and resort bookings in a competitive luxury hospitality market.",
+    strategy: "Developed comprehensive brand identity and marketing initiatives focused on customer engagement and occupancy rates.",
+    execution: "Integrated campaigns across digital marketing, content creation, and customer experience touchpoints.",
+    outcome: "Significant increase in brand awareness, customer engagement, and booking conversion rates.",
   },
   {
-    title: "Integrated Launch Campaign",
-    challenge: "New property needed high-trust market entry.",
-    strategy: "Positioned as experience-led destination with premium storytelling.",
-    execution: "Launch content, ad sequencing, and PR-style message consistency.",
-    outcome: "Placeholder for launch performance and booking conversion metrics.",
+    title: "Beachfront Property Development & Branding",
+    challenge: "Establish investor confidence and market positioning for large-scale hospitality development project.",
+    strategy: "Created investor communication strategy, premium brand positioning, and promotional campaign framework.",
+    execution: "Multi-channel marketing including investor relations, media strategy, and brand activation campaigns.",
+    outcome: "Successful project positioning, investor acquisition, and market establishment.",
   },
   {
-    title: "Performance Marketing Optimization",
-    challenge: "Rising media costs and inconsistent conversion quality.",
-    strategy: "Introduced decision framework using creative testing and funnel re-architecture.",
-    execution: "Channel prioritization, optimized campaigns, and dashboard reporting.",
-    outcome: "Placeholder for CPL, ROAS, and demand pipeline improvements.",
+    title: "B2B Distribution Business Expansion",
+    challenge: "Accelerate market penetration and establish business growth within competitive distribution sector.",
+    strategy: "Developed branding strategy, business development roadmap, and market expansion plan.",
+    execution: "Strategic positioning, partnership development, and targeted market outreach.",
+    outcome: "Successful market expansion and sustainable growth within target markets.",
   },
 ];
 
 export const leadership = [
-  "Team management and mentorship",
-  "Cross-functional communication",
-  "Decision-making under pressure",
-  "Brand culture development",
-  "Vision planning and execution alignment",
-  "Talent empowerment and accountability",
+  "Focus on measurable business results",
+  "Strategic market positioning",
+  "Lead generation and sales alignment",
+  "Cross-channel campaign execution",
+  "Brand development and growth planning",
+  "Partnership-driven approach",
 ];
 
 export const metrics = [
-  { label: "Campaigns Led", value: 120, suffix: "+" },
-  { label: "Brands Managed", value: 35, suffix: "+" },
-  { label: "Audience Reach", value: 1, suffix: "M+" },
-  { label: "Revenue Growth Impact", value: 45, suffix: "%" },
-  { label: "Teams Guided", value: 12, suffix: "+" },
-  { label: "Years Experience", value: 9, suffix: "+" },
+  { label: "Years of Experience", value: 10, suffix: "+" },
+  { label: "Projects Marketed", value: 15, suffix: "+" },
+  { label: "Customers Reached", value: 1000, suffix: "K+" },
+  { label: "Project Value", value: 100, suffix: "M+ BDT" },
 ];
 
 export const testimonials = [
   {
     quote:
-      "Strategic, calm under pressure, and consistently aligned marketing with business outcomes.",
-    author: "CEO Perspective",
+      "Focused on business results, not vanity metrics. Every strategy directly contributes to revenue growth.",
+    author: "Business Growth Focus",
   },
   {
     quote:
-      "Brings premium branding intelligence while staying deeply practical in execution.",
-    author: "Cross-Functional Leader",
+      "Understands both marketing strategy and sales execution. Works as a true partner, not just a service provider.",
+    author: "Partnership Approach",
   },
   {
     quote:
-      "A rare mix of creative instinct and data-backed decision making for growth.",
-    author: "Marketing Team Member",
+      "Hands-on experience with hospitality and real estate. Brings practical expertise and proven results.",
+    author: "Industry Knowledge",
   },
 ];
 
 export const insights = [
-  "How premium positioning changes conversion quality",
-  "Leadership frameworks for high-performing marketing teams",
-  "Consumer behavior shifts in hospitality branding",
-  "From campaign outputs to business-level growth systems",
+  "How to position your business for maximum market impact",
+  "Lead generation strategies that convert to revenue",
+  "Building a brand that attracts premium customers",
+  "From marketing campaigns to sustainable business growth",
 ];
 
 export const credentials = [
@@ -180,6 +180,29 @@ export const credentials = [
     detail: "Contact centre management, BPO operations, customer service excellence",
     category: "Professional",
     file: "/academic/PCS Back Page.jpg",
+  },
+];
+
+export const howIWork = [
+  {
+    step: 1,
+    title: "Understand Your Business",
+    description: "I learn about your goals, challenges, target audience, and current market position. Deep understanding comes first.",
+  },
+  {
+    step: 2,
+    title: "Develop the Strategy",
+    description: "I create a tailored growth and marketing plan aligned with your revenue goals and competitive landscape.",
+  },
+  {
+    step: 3,
+    title: "Execute & Optimize",
+    description: "I implement campaigns, monitor performance, and continuously improve results based on real data.",
+  },
+  {
+    step: 4,
+    title: "Scale Growth",
+    description: "Once we find what works, we focus on increasing reach, sales, and profitability sustainably.",
   },
 ];
 

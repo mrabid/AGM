@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { AnimatedSection } from "../components/AnimatedSection";
 import {
-  caseStudies, credentials, expertise, insights, leadership,
+  caseStudies, credentials, expertise, howIWork, insights, leadership,
   metrics, testimonials, timeline, tools, trustBrands,
 } from "../data/content";
 import profileImage from "../../Morshed.jpg.jpeg";
@@ -85,7 +85,7 @@ function AnimatedNumber({ target, suffix }) {
    HERO
 ══════════════════════════════════ */
 export function Hero() {
-  const roles = ["Brand Manager", "Branding Strategist", "Marketing Leader"];
+  const roles = ["Business Growth Strategist", "Marketing Leader", "Brand Developer"];
   const [roleIdx, setRoleIdx] = useState(0);
 
   useEffect(() => {
@@ -107,13 +107,13 @@ export function Hero() {
         <motion.div variants={stagger(0.12)} initial="hidden" animate="show">
           <motion.p variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-accent-gold/30 bg-accent-gold/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-accent-gold">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent-gold" />
-            Executive Brand Leadership Portfolio
+            Business Growth & Marketing Strategy
           </motion.p>
 
           <motion.h1 variants={fadeUp} className="mt-5 font-['Manrope'] text-5xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-7xl">
-            Morshedul
+            Help Businesses
             <br />
-            <span className="text-gradient">Islam</span>
+            <span className="text-gradient">Grow & Thrive</span>
           </motion.h1>
 
           <motion.div variants={fadeUp} className="mt-4 flex items-center gap-2 text-lg text-accent-smoke sm:text-xl">
@@ -131,24 +131,23 @@ export function Hero() {
           </motion.div>
 
           <motion.p variants={fadeUp} className="mt-6 max-w-lg text-base leading-relaxed text-accent-smoke">
-            I build strategic brand systems that blend creativity, market intelligence, and operational leadership—scaling trust, demand, and long-term business value across industries.
+            With years of experience in hospitality, tourism, real estate, and digital marketing, I help businesses attract more customers, increase sales, and build stronger brands that generate measurable results.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-5 flex flex-wrap gap-2 text-xs font-medium text-accent-smoke">
-            {["Meta Certified Creative Strategy", "Google Digital Marketing", "IELTS 6.5 · Fluent English"].map((t) => (
+            {["Hospitality & Resort Marketing", "Real Estate Strategy", "10+ Years Experience"].map((t) => (
               <span key={t} className="rounded-full border border-white/15 bg-white/[0.03] px-3 py-1">{t}</span>
             ))}
           </motion.div>
 
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
             <a href="#case-studies" className="btn-premium group">
-              View Case Studies
+              View My Work
               <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
             </a>
-            <a href="#" className="btn-secondary">
-              <Download size={15} /> Download Resume
+            <a href="#contact" className="btn-secondary">
+              <MessageCircle size={15} /> Let's Talk
             </a>
-            <a href="#contact" className="btn-link">Let's Connect →</a>
           </motion.div>
         </motion.div>
 
@@ -175,8 +174,8 @@ export function Hero() {
               {/* floating badge */}
               <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between rounded-xl border border-white/15 bg-base-950/80 px-4 py-3 backdrop-blur-sm">
                 <div>
-                  <p className="text-xs font-semibold text-white">Morshedul Islam</p>
-                  <p className="text-[10px] text-accent-smoke">AGM · Chuti Group · Dhaka</p>
+                  <p className="text-xs font-semibold text-white">Business Growth Strategist</p>
+                  <p className="text-[10px] text-accent-smoke">Marketing & Brand Development</p>
                 </div>
                 <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-2 py-1 text-[10px] font-medium text-emerald-400">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
@@ -226,16 +225,16 @@ export function About() {
             <div className="flex h-[380px] items-center justify-center bg-gradient-to-br from-white/[0.03] to-accent-gold/5">
               <div className="text-center">
                 <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full border border-dashed border-white/20">
-                  <Users className="text-accent-smoke" size={20} />
+                  <Briefcase className="text-accent-smoke" size={20} />
                 </div>
-                <p className="text-xs text-accent-smoke">Add a candid / work photo here</p>
+                <p className="text-xs text-accent-smoke">Your business story</p>
                 <code className="mt-1 block text-[10px] text-white/30">src: media/about.jpg</code>
               </div>
             </div>
           </div>
           {/* stat badge */}
           <div className="absolute -bottom-4 -right-4 rounded-xl border border-white/15 bg-base-900 px-5 py-3 shadow-soft">
-            <p className="text-2xl font-bold text-white">9+</p>
+            <p className="text-2xl font-bold text-white">10+</p>
             <p className="text-xs text-accent-smoke">Years of experience</p>
           </div>
         </motion.div>
@@ -244,20 +243,20 @@ export function About() {
         <motion.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <motion.p variants={fadeUp} className="text-xs font-medium uppercase tracking-[0.24em] text-accent-gold">About</motion.p>
           <motion.h2 variants={fadeUp} className="mt-3 text-4xl font-bold tracking-tight text-white">
-            Strategic leadership with human-centered brand thinking
+            Building businesses through strategy and results
           </motion.h2>
           <motion.p variants={fadeUp} className="mt-5 text-base leading-relaxed text-accent-smoke">
-            I started as a digital specialist and grew into a brand and marketing executive through consistent high-stakes delivery. Today I lead strategy, creative direction, campaign architecture, and team culture at Chuti Group.
+            I help businesses attract more customers, increase sales, and build stronger brands. With experience across hospitality, tourism, real estate, and digital marketing, I focus on creating strategies that generate measurable business results.
           </motion.p>
           <motion.p variants={fadeUp} className="mt-4 text-base leading-relaxed text-accent-smoke">
-            My philosophy is simple: every brand decision should sharpen business direction, not only visual appeal. Great marketing earns trust before it earns attention.
+            My approach is simple: every marketing decision should contribute to revenue growth. I work as a true partner, combining strategic thinking with hands-on execution to deliver real business outcomes.
           </motion.p>
           <motion.div variants={fadeUp} className="mt-8 grid grid-cols-2 gap-4">
             {[
-              { label: "Branding Philosophy", val: "Strategy-first, story-led" },
-              { label: "Leadership Style", val: "Empowering, direct, outcome-focused" },
-              { label: "Decision Framework", val: "Data + intuition + context" },
-              { label: "Core belief", val: "Brands are promises — keep them." },
+              { label: "Core Focus", val: "Business results over vanity metrics" },
+              { label: "Approach", val: "Strategic, practical, and partnership-driven" },
+              { label: "Expertise", val: "Hospitality, real estate, brand strategy" },
+              { label: "Commitment", val: "Sustainable growth and measurable impact" },
             ].map((item) => (
               <div key={item.label} className="rounded-xl border border-white/10 bg-white/[0.025] p-3">
                 <p className="text-[11px] uppercase tracking-widest text-accent-gold">{item.label}</p>
@@ -276,7 +275,7 @@ export function About() {
 ══════════════════════════════════ */
 export function Expertise() {
   return (
-    <AnimatedSection id="expertise" label="Core Expertise" title="What I bring to the table">
+    <AnimatedSection id="expertise" label="Capabilities" title="My Core Expertise">
       <motion.div
         variants={stagger(0.07)}
         initial="hidden"
@@ -298,6 +297,35 @@ export function Expertise() {
           );
         })}
       </motion.div>
+    </AnimatedSection>
+  );
+}
+
+/* ══════════════════════════════════
+   HOW I WORK
+══════════════════════════════════ */
+export function HowIWork() {
+  return (
+    <AnimatedSection id="how-i-work" label="Process" title="How I Work">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {howIWork.map((item, i) => (
+          <motion.div
+            key={item.step}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Card className="flex h-full flex-col">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent-gold/20 to-accent-gold/5 text-lg font-bold text-accent-gold">
+                {item.step}
+              </div>
+              <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+              <p className="mt-3 flex-grow leading-relaxed text-accent-smoke">{item.description}</p>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
     </AnimatedSection>
   );
 }
@@ -783,18 +811,18 @@ export function Contact() {
           <div className="pointer-events-none absolute inset-0 bg-noise opacity-60" />
           <p className="text-xs font-medium uppercase tracking-[0.24em] text-accent-gold">Open to opportunities</p>
           <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Let's build brands<br />people remember.
+            Let's Grow Your Business<br />Together
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base text-accent-smoke">
-            Available for advisory, leadership roles, strategic consulting, and high-impact marketing transformation.
+            Whether you're launching a venture, promoting a project, or strengthening your brand, let's discuss your goals and create a winning strategy.
           </p>
         </div>
 
         {/* contact grid */}
         <div className="grid gap-px border-t border-white/10 md:grid-cols-3">
           {[
-            { icon: <Mail size={18} />, label: "Email", val: "morshedulislam512@gmail.com", href: "mailto:morshedulislam512@gmail.com" },
-            { icon: <Linkedin size={18} />, label: "LinkedIn", val: "linkedin.com/in/morshedul", href: "https://linkedin.com" },
+            { icon: <Mail size={18} />, label: "Email", val: "islm.hr@gmail.com", href: "mailto:islm.hr@gmail.com" },
+            { icon: <Linkedin size={18} />, label: "LinkedIn", val: "linkedin.com/in/morshedul-islam", href: "https://www.linkedin.com/in/morshedul-islam/" },
             { icon: <MessageCircle size={18} />, label: "WhatsApp", val: "+880 1771 969671", href: "https://wa.me/8801771969671" },
           ].map((item) => (
             <a

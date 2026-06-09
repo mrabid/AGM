@@ -14,6 +14,7 @@ import {
   Experience,
   Gallery,
   Hero,
+  HowIWork,
   Insights,
   Leadership,
   Metrics,
@@ -48,6 +49,9 @@ export default function App() {
         <About />
         <Divider />
         <Expertise />
+        <Divider />
+        <HowIWork />
+        <Divider />
         <Metrics />
         <Divider />
         <Experience />
