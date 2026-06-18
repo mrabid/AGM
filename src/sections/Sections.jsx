@@ -32,9 +32,10 @@ function Card({ children, className = "", tilt = false }) {
   const y = useMotionValue(0);
   const rotX = useTransform(y, [-60, 60], [5, -5]);
   const rotY = useTransform(x, [-60, 60], [-5, 5]);
+  const canTilt = tilt && typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   const onMouseMove = (e) => {
-    if (!tilt) return;
+    if (!canTilt || !ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     x.set(e.clientX - rect.left - rect.width / 2);
     y.set(e.clientY - rect.top - rect.height / 2);
@@ -46,10 +47,8 @@ function Card({ children, className = "", tilt = false }) {
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      style={tilt ? { rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" } : {}}
-      className={`group relative rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-soft
-        transition-colors duration-500 hover:border-accent-gold/40 hover:bg-white/[0.06]
-        ${className}`}
+      style={canTilt ? { rotateX: rotX, rotateY: rotY, transformStyle: "preserve-3d" } : {}}
+      className={`premium-card group relative rounded-xl p-4 sm:p-5 ${className}`}
     >
       <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 ring-1 ring-inset ring-accent-gold/30 transition-opacity duration-500 group-hover:opacity-100" />
       {children}
@@ -94,96 +93,89 @@ export function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="relative min-h-[92vh] overflow-hidden">
-      {/* ambient blobs */}
+    <section id="hero" className="relative min-h-[85vh] overflow-hidden sm:min-h-[88vh]">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="blob blob-1" />
         <div className="blob blob-2" />
         <div className="blob blob-3" />
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 pb-24 pt-20 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:px-8">
-        {/* copy */}
-        <motion.div variants={stagger(0.12)} initial="hidden" animate="show">
-          <motion.p variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-accent-gold/30 bg-accent-gold/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-accent-gold">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent-gold" />
-            Business Growth & Marketing Strategy
-          </motion.p>
-
-          <motion.h1 variants={fadeUp} className="mt-5 font-['Manrope'] text-5xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-7xl">
-            Help Businesses
-            <br />
-            <span className="text-gradient">Grow & Thrive</span>
-          </motion.h1>
-
-          <motion.div variants={fadeUp} className="mt-4 flex items-center gap-2 text-lg text-accent-smoke sm:text-xl">
-            <span className="h-px w-6 bg-accent-gold" />
-            <motion.span
-              key={roleIdx}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.4 }}
-              className="font-medium text-white"
-            >
-              {roles[roleIdx]}
-            </motion.span>
-          </motion.div>
-
-          <motion.p variants={fadeUp} className="mt-6 max-w-lg text-base leading-relaxed text-accent-smoke">
-            With years of experience in hospitality, tourism, real estate, and digital marketing, I help businesses attract more customers, increase sales, and build stronger brands that generate measurable results.
-          </motion.p>
-
-          <motion.div variants={fadeUp} className="mt-5 flex flex-wrap gap-2 text-xs font-medium text-accent-smoke">
-            {["Hospitality & Resort Marketing", "Real Estate Strategy", "10+ Years Experience"].map((t) => (
-              <span key={t} className="rounded-full border border-white/15 bg-white/[0.03] px-3 py-1">{t}</span>
-            ))}
-          </motion.div>
-
-          <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
-            <a href="#case-studies" className="btn-premium group">
-              View My Work
-              <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-            </a>
-            <a href="#contact" className="btn-secondary">
-              <MessageCircle size={15} /> Let's Talk
-            </a>
-          </motion.div>
-        </motion.div>
-
-        {/* portrait */}
+      <div className="relative mx-auto grid w-full max-w-7xl gap-6 px-4 pb-12 pt-12 sm:gap-8 sm:px-6 sm:pb-14 sm:pt-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-10 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, scale: 0.94, y: 20 }}
+          initial={{ opacity: 0, scale: 0.96, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="relative"
+          transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="relative order-first mx-auto w-full max-w-sm lg:order-last lg:max-w-none"
         >
-          {/* glow ring */}
-          <div className="absolute -inset-4 animate-pulse-slow rounded-[2.5rem] bg-gradient-to-br from-accent-gold/20 via-transparent to-accent-gold/5 blur-2xl" />
-          {/* gradient border frame */}
-          <div className="portrait-frame relative rounded-[2rem] p-[1.5px]">
-            <div className="relative overflow-hidden rounded-[2rem] bg-base-900">
+          <div className="absolute -inset-3 animate-pulse-slow rounded-[2rem] bg-gradient-to-br from-accent-gold/20 via-transparent to-accent-gold/5 blur-2xl sm:-inset-4 sm:rounded-[2.5rem]" />
+          <div className="portrait-frame relative rounded-[1.5rem] p-[1.5px] sm:rounded-[2rem]">
+            <div className="theme-elevated relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem]">
               <img
                 src={profileImage}
-                alt="Morshedul Islam — AGM Branding & Marketing"
-                className="h-[540px] w-full object-cover object-top"
+                alt="Morshedul Islam — Business Growth Strategist"
+                className="h-[300px] w-full object-cover object-top sm:h-[380px] lg:h-[460px] xl:h-[500px]"
                 loading="eager"
               />
-              {/* bottom gradient overlay */}
-              <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-base-950 to-transparent" />
-              {/* floating badge */}
-              <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between rounded-xl border border-white/15 bg-base-950/80 px-4 py-3 backdrop-blur-sm">
-                <div>
-                  <p className="text-xs font-semibold text-white">Business Growth Strategist</p>
-                  <p className="text-[10px] text-accent-smoke">Marketing & Brand Development</p>
+              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[var(--c-bg)] to-transparent sm:h-32" />
+              <div className="theme-elevated theme-border absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 rounded-lg border px-3 py-2 backdrop-blur-sm sm:bottom-4 sm:left-4 sm:right-4">
+                <div className="min-w-0">
+                  <p className="theme-text type-caption font-semibold truncate">Business Growth Strategist</p>
+                  <p className="theme-muted type-caption truncate">Marketing & Brand Development</p>
                 </div>
-                <span className="flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-2 py-1 text-[10px] font-medium text-emerald-400">
+                <span className="type-caption flex shrink-0 items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 font-medium text-emerald-400">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                   Available
                 </span>
               </div>
             </div>
           </div>
+        </motion.div>
+
+        <motion.div variants={stagger(0.12)} initial="hidden" animate="show" className="order-last lg:order-first">
+          <motion.p variants={fadeUp} className="type-label inline-flex items-center gap-2 rounded-full border border-accent-gold/30 bg-accent-gold/10 px-3 py-1 text-accent-gold">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent-gold" />
+            Business Growth & Marketing Strategy
+          </motion.p>
+
+          <motion.h1 variants={fadeUp} className="type-hero theme-text mt-3">
+            Help Businesses
+            <br />
+            <span className="text-gradient">Grow & Thrive</span>
+          </motion.h1>
+
+          <motion.div variants={fadeUp} className="theme-muted mt-2.5 flex items-center gap-2 sm:mt-3">
+            <span className="h-px w-5 shrink-0 bg-accent-gold sm:w-6" />
+            <motion.span
+              key={roleIdx}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4 }}
+              className="type-role theme-text font-medium"
+            >
+              {roles[roleIdx]}
+            </motion.span>
+          </motion.div>
+
+          <motion.p variants={fadeUp} className="type-body theme-muted mt-3 max-w-lg sm:mt-4">
+            With years of experience in hospitality, tourism, real estate, and digital marketing, I help businesses attract more customers, increase sales, and build stronger brands that generate measurable results.
+          </motion.p>
+
+          <motion.div variants={fadeUp} className="theme-muted mt-3 flex flex-wrap gap-1.5 sm:mt-4">
+            {["Hospitality & Resort Marketing", "Real Estate Strategy", "10+ Years Experience"].map((t) => (
+              <span key={t} className="type-caption panel-soft rounded-full px-2.5 py-1">{t}</span>
+            ))}
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+            <a href="#case-studies" className="btn-premium group w-full sm:w-auto">
+              View My Work
+              <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+            </a>
+            <a href="#contact" className="btn-secondary w-full sm:w-auto">
+              <MessageCircle size={15} /> Let's Talk
+            </a>
+          </motion.div>
         </motion.div>
       </div>
     </section>
@@ -195,14 +187,14 @@ export function Hero() {
 ══════════════════════════════════ */
 export function Trust() {
   return (
-    <div className="relative overflow-hidden border-y border-white/10 bg-white/[0.015] py-8">
-      <p className="mb-5 text-center text-xs font-medium uppercase tracking-[0.24em] text-accent-smoke">
+    <div className="theme-border relative overflow-hidden border-y py-5 sm:py-6" style={{ background: "var(--c-trust-bg)" }}>
+      <p className="type-label theme-muted mb-3 text-center sm:mb-4">
         Trusted by brands, teams & growing businesses
       </p>
       <div className="marquee-track">
         <div className="marquee-inner">
           {[...trustBrands, ...trustBrands].map((brand, i) => (
-            <span key={i} className="mx-6 whitespace-nowrap text-sm font-medium text-white/70">
+            <span key={i} className="type-small theme-muted mx-4 whitespace-nowrap font-medium sm:mx-5">
               {brand}
             </span>
           ))}
@@ -218,49 +210,47 @@ export function Trust() {
 export function About() {
   return (
     <AnimatedSection id="about">
-      <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-10">
         {/* image slot */}
         <motion.div variants={fadeUp} className="relative">
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-base-900">
-            <div className="flex h-[380px] items-center justify-center bg-gradient-to-br from-white/[0.03] to-accent-gold/5">
-              <div className="text-center">
-                <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full border border-dashed border-white/20">
-                  <Briefcase className="text-accent-smoke" size={20} />
+          <div className="premium-card overflow-hidden rounded-2xl">
+            <div className="flex h-[240px] items-center justify-center bg-gradient-to-br from-accent-gold/5 to-transparent sm:h-[300px] lg:h-[340px]">
+              <div className="px-4 text-center">
+                <div className="theme-border mx-auto mb-2.5 flex h-12 w-12 items-center justify-center rounded-full border border-dashed">
+                  <Briefcase className="theme-muted" size={18} />
                 </div>
-                <p className="text-xs text-accent-smoke">Your business story</p>
-                <code className="mt-1 block text-[10px] text-white/30">src: media/about.jpg</code>
+                <p className="theme-muted type-caption">Your business story</p>
+                <code className="theme-faint type-caption mt-1 block">src: media/about.jpg</code>
               </div>
             </div>
           </div>
-          {/* stat badge */}
-          <div className="absolute -bottom-4 -right-4 rounded-xl border border-white/15 bg-base-900 px-5 py-3 shadow-soft">
-            <p className="text-2xl font-bold text-white">10+</p>
-            <p className="text-xs text-accent-smoke">Years of experience</p>
+          <div className="theme-elevated theme-border absolute -bottom-3 -right-2 rounded-lg border px-3.5 py-2 shadow-soft sm:-bottom-4 sm:-right-3 sm:px-4 sm:py-2.5">
+            <p className="type-stat theme-text">10+</p>
+            <p className="theme-muted type-caption">Years of experience</p>
           </div>
         </motion.div>
 
-        {/* text */}
         <motion.div variants={stagger(0.1)} initial="hidden" whileInView="show" viewport={{ once: true }}>
-          <motion.p variants={fadeUp} className="text-xs font-medium uppercase tracking-[0.24em] text-accent-gold">About</motion.p>
-          <motion.h2 variants={fadeUp} className="mt-3 text-4xl font-bold tracking-tight text-white">
+          <motion.p variants={fadeUp} className="type-label text-accent-gold">About</motion.p>
+          <motion.h2 variants={fadeUp} className="type-h2 theme-text mt-2">
             Building businesses through strategy and results
           </motion.h2>
-          <motion.p variants={fadeUp} className="mt-5 text-base leading-relaxed text-accent-smoke">
+          <motion.p variants={fadeUp} className="type-body theme-muted mt-3 sm:mt-4">
             I help businesses attract more customers, increase sales, and build stronger brands. With experience across hospitality, tourism, real estate, and digital marketing, I focus on creating strategies that generate measurable business results.
           </motion.p>
-          <motion.p variants={fadeUp} className="mt-4 text-base leading-relaxed text-accent-smoke">
+          <motion.p variants={fadeUp} className="type-body theme-muted mt-2.5 sm:mt-3">
             My approach is simple: every marketing decision should contribute to revenue growth. I work as a true partner, combining strategic thinking with hands-on execution to deliver real business outcomes.
           </motion.p>
-          <motion.div variants={fadeUp} className="mt-8 grid grid-cols-2 gap-4">
+          <motion.div variants={fadeUp} className="mt-5 grid grid-cols-1 gap-2.5 sm:mt-6 sm:grid-cols-2 sm:gap-3">
             {[
               { label: "Core Focus", val: "Business results over vanity metrics" },
               { label: "Approach", val: "Strategic, practical, and partnership-driven" },
               { label: "Expertise", val: "Hospitality, real estate, brand strategy" },
               { label: "Commitment", val: "Sustainable growth and measurable impact" },
             ].map((item) => (
-              <div key={item.label} className="rounded-xl border border-white/10 bg-white/[0.025] p-3">
-                <p className="text-[11px] uppercase tracking-widest text-accent-gold">{item.label}</p>
-                <p className="mt-1 text-sm font-medium text-white">{item.val}</p>
+              <div key={item.label} className="panel-inset p-3">
+                <p className="type-label text-accent-gold">{item.label}</p>
+                <p className="type-small theme-text mt-1 font-medium">{item.val}</p>
               </div>
             ))}
           </motion.div>
@@ -281,17 +271,17 @@ export function Expertise() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+        className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
       >
         {expertise.map((item, i) => {
           const Icon = expertiseIcons[i % expertiseIcons.length];
           return (
             <motion.div key={item} variants={fadeUp}>
-              <Card tilt className="min-h-[130px]">
-                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-accent-gold/10 text-accent-gold">
-                  <Icon size={16} />
+              <Card tilt className="min-h-[120px]">
+                <div className="mb-2.5 flex h-8 w-8 items-center justify-center rounded-lg bg-accent-gold/10 text-accent-gold">
+                  <Icon size={15} />
                 </div>
-                <h3 className="text-sm font-semibold text-white">{item}</h3>
+                <h3 className="type-small theme-text font-semibold">{item}</h3>
               </Card>
             </motion.div>
           );
@@ -307,7 +297,7 @@ export function Expertise() {
 export function HowIWork() {
   return (
     <AnimatedSection id="how-i-work" label="Process" title="How I Work">
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
         {howIWork.map((item, i) => (
           <motion.div
             key={item.step}
@@ -317,11 +307,11 @@ export function HowIWork() {
             transition={{ delay: i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
             <Card className="flex h-full flex-col">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent-gold/20 to-accent-gold/5 text-lg font-bold text-accent-gold">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-accent-gold/20 to-accent-gold/5 text-base font-bold text-accent-gold">
                 {item.step}
               </div>
-              <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-              <p className="mt-3 flex-grow leading-relaxed text-accent-smoke">{item.description}</p>
+              <h3 className="type-h3 theme-text">{item.title}</h3>
+              <p className="type-small theme-muted mt-2 flex-grow">{item.description}</p>
             </Card>
           </motion.div>
         ))}
@@ -336,7 +326,7 @@ export function HowIWork() {
 export function Experience() {
   return (
     <AnimatedSection id="experience" label="Career Journey" title="Experience Timeline">
-      <div className="relative ml-3 border-l border-white/10 pl-8">
+      <div className="relative ml-3 border-l border-white/10 pl-6 sm:pl-8">
         {timeline.map((item, i) => (
           <motion.article
             key={item.role}
@@ -344,7 +334,7 @@ export function Experience() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mb-8 last:mb-0"
+            className="relative mb-6 last:mb-0"
           >
             <span className="absolute -left-[42px] top-4 flex h-5 w-5 items-center justify-center rounded-full border border-accent-gold bg-base-950 ring-4 ring-base-950">
               <span className="h-2 w-2 rounded-full bg-accent-gold" />
@@ -352,14 +342,14 @@ export function Experience() {
             <Card>
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-accent-gold">{item.duration}</p>
-                  <h3 className="mt-1 text-xl font-bold text-white">{item.role}</h3>
-                  <p className="mt-0.5 text-sm font-medium text-accent-smoke">{item.company}</p>
+                  <p className="type-label text-accent-gold">{item.duration}</p>
+                  <h3 className="type-h3 theme-text mt-1 font-bold">{item.role}</h3>
+                  <p className="type-small theme-muted mt-0.5 font-medium">{item.company}</p>
                 </div>
               </div>
-              <ul className="mt-4 space-y-2">
+              <ul className="mt-3 space-y-1.5">
                 {item.achievements.map((a) => (
-                  <li key={a} className="flex items-start gap-2 text-sm text-accent-smoke">
+                  <li key={a} className="type-small theme-muted flex items-start gap-2">
                     <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-accent-gold" />
                     {a}
                   </li>
@@ -378,67 +368,189 @@ export function Experience() {
 ══════════════════════════════════ */
 export function CaseStudies() {
   return (
-    <AnimatedSection id="case-studies" label="Portfolio" title="Featured Case Studies" subtitle="Agency-style strategic presentations. Replace placeholders with real assets, metrics, and campaign visuals.">
-      <div className="space-y-8">
-        {caseStudies.map((study, i) => (
-          <motion.article
-            key={study.title}
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025]"
-          >
-            {/* hero banner placeholder */}
-            <div className="relative flex h-48 items-center justify-center border-b border-white/10 bg-gradient-to-br from-accent-gold/10 via-white/[0.02] to-transparent">
-              <div className="text-center">
-                <PlayCircle className="mx-auto text-accent-gold/50" size={32} />
-                <p className="mt-2 text-xs text-accent-smoke">Hero banner / campaign visual</p>
-                <code className="text-[10px] text-white/25">media/case-{i + 1}-banner.jpg</code>
-              </div>
-              <span className="absolute left-5 top-5 rounded-full bg-accent-gold/20 px-3 py-1 text-xs font-semibold text-accent-gold">
-                Case Study {String(i + 1).padStart(2, "0")}
-              </span>
-            </div>
-
-            <div className="grid gap-8 p-6 lg:grid-cols-[1.1fr_0.9fr]">
-              <div>
-                <h3 className="text-2xl font-bold text-white">{study.title}</h3>
-                <dl className="mt-5 space-y-4 text-sm">
-                  <CaseField label="Brand Challenge" value={study.challenge} />
-                  <CaseField label="Strategic Direction" value={study.strategy} />
-                  <CaseField label="Execution" value={study.execution} />
-                </dl>
-              </div>
-              <div className="space-y-4">
-                <CaseField label="Business Outcome" value={study.outcome} />
-                {/* metrics placeholder */}
-                <div className="rounded-xl border border-dashed border-white/15 bg-base-900/60 p-4">
-                  <p className="text-[11px] uppercase tracking-widest text-accent-gold">Key Metrics</p>
-                  <div className="mt-3 grid grid-cols-3 gap-3">
-                    {["ROI", "Reach", "Conv."].map((m) => (
-                      <div key={m} className="rounded-lg bg-white/[0.03] p-2 text-center">
-                        <p className="text-lg font-bold text-white">—</p>
-                        <p className="text-[10px] text-accent-smoke">{m}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="mt-2 text-[10px] text-white/25">Replace with real data</p>
-                </div>
-              </div>
-            </div>
-          </motion.article>
-        ))}
+    <AnimatedSection
+      id="case-studies"
+      label="Portfolio"
+      title="Featured Case Studies"
+      subtitle="Agency-style strategic presentations with measurable business outcomes."
+    >
+      <div className="space-y-6">
+        {caseStudies.map((study, i) =>
+          study.featured ? (
+            <FeaturedCaseStudy key={study.id} study={study} index={i} />
+          ) : (
+            <StandardCaseStudy key={study.title} study={study} index={i} />
+          )
+        )}
       </div>
     </AnimatedSection>
   );
 }
 
+function FeaturedCaseStudy({ study, index }) {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="premium-card overflow-hidden rounded-xl sm:rounded-2xl"
+    >
+      {/* Banner */}
+      <div className="theme-border relative border-b bg-gradient-to-br from-accent-gold/12 via-blue-500/5 to-transparent px-4 py-7 sm:px-6 sm:py-8">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(198,168,109,0.12),transparent_45%)]" />
+        <div className="relative">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="type-caption rounded-full bg-accent-gold/20 px-2.5 py-0.5 font-semibold text-accent-gold">
+              Case Study {String(index + 1).padStart(2, "0")}
+            </span>
+            <span className="type-caption panel-soft theme-muted rounded-full px-2.5 py-0.5">
+              {study.client}
+            </span>
+            <span className="type-caption theme-faint">{study.period}</span>
+          </div>
+          <h3 className="type-h2 theme-text mt-3 max-w-4xl">
+            {study.title}
+          </h3>
+          <p className="type-body theme-muted mt-3 max-w-3xl">
+            {study.summary}
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-5 p-4 sm:space-y-6 sm:p-6">
+        {/* Metrics grid */}
+        <div>
+          <p className="type-label mb-3 text-accent-gold">
+            Measurable Results — 20 Months
+          </p>
+          <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3">
+            {study.metrics.map((m) => (
+              <div
+                key={m.label}
+                className="panel-inset p-3 transition hover:border-accent-gold/30"
+              >
+                <p className="type-label theme-faint">{m.label}</p>
+                <div className="mt-1.5 flex flex-wrap items-end gap-2">
+                  <span className="type-caption theme-faint line-through">{m.before}</span>
+                  <span className="case-metric-after type-stat theme-text">{m.after}</span>
+                </div>
+                <p className="type-caption theme-muted mt-1">{m.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Challenge / Strategy / Execution */}
+        <div className="grid gap-3 lg:grid-cols-3">
+          <CaseField label="Brand Challenge" value={study.challenge} />
+          <CaseField label="Strategic Direction" value={study.strategy} />
+          <CaseField label="Execution" value={study.execution} />
+        </div>
+
+        {/* Objectives */}
+        <div className="panel-inset p-4">
+          <p className="type-label text-accent-gold">Objectives</p>
+          <ul className="mt-3 grid gap-1.5 sm:grid-cols-2">
+            {study.objectives.map((obj) => (
+              <li key={obj} className="type-small theme-muted flex items-start gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent-gold" />
+                {obj}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Channels + Portfolio */}
+        <div className="grid gap-3 lg:grid-cols-2">
+          <div className="panel-inset p-4">
+            <p className="type-label text-accent-gold">Marketing Channels</p>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {study.channels.map((ch) => (
+                <span key={ch} className="type-caption panel-soft theme-muted rounded-full px-2.5 py-0.5">
+                  {ch}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="panel-inset p-4">
+            <p className="type-label text-accent-gold">Portfolio Brands</p>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {study.portfolio.map((brand) => (
+                <span key={brand} className="type-caption rounded-full border border-accent-gold/20 bg-accent-gold/5 px-2.5 py-0.5 text-accent-gold">
+                  {brand}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Outcome + Success Factors */}
+        <div className="grid gap-3 lg:grid-cols-[1.2fr_0.8fr]">
+          <CaseField label="Business Outcome" value={study.outcome} />
+          <div className="panel-inset p-4">
+            <p className="type-label text-accent-gold">Key Success Factors</p>
+            <ul className="mt-3 space-y-1.5">
+              {study.successFactors.map((f) => (
+                <li key={f} className="type-small theme-muted flex items-start gap-2">
+                  <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-accent-gold" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Visual placeholder */}
+        <div className="panel-soft rounded-xl border-dashed p-4 text-center sm:p-5">
+          <PlayCircle className="mx-auto text-accent-gold/40" size={24} />
+          <p className="type-caption theme-muted mt-2">Campaign visuals / before-after assets</p>
+          <code className="type-caption theme-faint">media/case-1-banner.jpg</code>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+function StandardCaseStudy({ study, index }) {
+  return (
+    <motion.article
+      key={study.title}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="premium-card overflow-hidden rounded-xl"
+    >
+      <div className="relative flex h-36 items-center justify-center border-b border-white/10 bg-gradient-to-br from-accent-gold/8 via-white/[0.02] to-transparent">
+        <span className="type-caption absolute left-4 top-4 rounded-full bg-accent-gold/20 px-2.5 py-0.5 font-semibold text-accent-gold">
+          Case Study {String(index + 1).padStart(2, "0")}
+        </span>
+        <div className="type-caption theme-muted text-center">
+          <PlayCircle className="mx-auto mb-1.5 opacity-40" size={24} />
+          <p>Visual placeholder — add campaign assets</p>
+        </div>
+      </div>
+      <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <h3 className="type-h3 theme-text font-bold">{study.title}</h3>
+          <dl className="type-small mt-3 space-y-2.5">
+            <CaseField label="Brand Challenge" value={study.challenge} />
+            <CaseField label="Strategic Direction" value={study.strategy} />
+            <CaseField label="Execution" value={study.execution} />
+          </dl>
+        </div>
+        <CaseField label="Business Outcome" value={study.outcome} />
+      </div>
+    </motion.article>
+  );
+}
+
 function CaseField({ label, value }) {
   return (
-    <div className="rounded-lg border border-white/10 bg-white/[0.02] p-3">
-      <dt className="text-[11px] uppercase tracking-[0.15em] text-accent-gold">{label}</dt>
-      <dd className="mt-1.5 leading-relaxed text-accent-smoke">{value}</dd>
+    <div className="panel-inset p-3 sm:p-4">
+      <dt className="type-label text-accent-gold">{label}</dt>
+      <dd className="type-small theme-muted mt-1.5">{value}</dd>
     </div>
   );
 }
@@ -456,7 +568,7 @@ export function Leadership() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
       >
         {leadership.map((item, i) => {
           const Icon = leadershipIcons[i % leadershipIcons.length];
@@ -466,7 +578,7 @@ export function Leadership() {
                 <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent-gold/20 to-accent-gold/5 text-accent-gold">
                   <Icon size={18} />
                 </div>
-                <p className="font-semibold text-white">{item}</p>
+                <p className="type-small theme-text font-semibold">{item}</p>
               </Card>
             </motion.div>
           );
@@ -481,14 +593,14 @@ export function Leadership() {
 ══════════════════════════════════ */
 export function Metrics() {
   return (
-    <div className="relative overflow-hidden border-y border-white/10 py-20">
+    <div className="theme-border relative overflow-hidden border-y py-10 sm:py-12">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-accent-gold/[0.04] via-transparent to-accent-gold/[0.03]" />
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-10 text-center text-xs font-medium uppercase tracking-[0.24em] text-accent-gold"
+          className="type-label mb-6 text-center text-accent-gold sm:mb-8"
         >
           Impact by the numbers
         </motion.p>
@@ -497,15 +609,15 @@ export function Metrics() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-2.5 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3"
         >
           {metrics.map((m) => (
             <motion.div key={m.label} variants={fadeUp}>
               <Card className="text-center">
-                <p className="text-5xl font-extrabold tracking-tight text-white">
+                <p className="type-stat theme-text">
                   <AnimatedNumber target={m.value} suffix={m.suffix} />
                 </p>
-                <p className="mt-2 text-sm text-accent-smoke">{m.label}</p>
+                <p className="type-small theme-muted mt-1.5">{m.label}</p>
               </Card>
             </motion.div>
           ))}
@@ -526,22 +638,22 @@ export function Testimonials() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid gap-4 lg:grid-cols-3"
+        className="grid gap-3 lg:grid-cols-3"
       >
         {testimonials.map((item, i) => (
           <motion.div key={item.author} variants={fadeUp}>
             <Card className="flex h-full flex-col justify-between">
               <div>
-                <span className="font-['Manrope'] text-5xl leading-none text-accent-gold/40">"</span>
-                <p className="mt-1 text-base leading-relaxed text-accent-smoke">{item.quote}</p>
+                <span className="font-['Manrope'] text-4xl leading-none text-accent-gold/40">"</span>
+                <p className="type-body theme-muted mt-1">{item.quote}</p>
               </div>
-              <div className="mt-6 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-gold/15 text-xs font-bold text-accent-gold">
+              <div className="mt-4 flex items-center gap-2.5">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-gold/15 type-caption font-bold text-accent-gold">
                   {item.author.charAt(0)}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">{item.author}</p>
-                  <p className="text-xs text-accent-smoke">Replace with real name & title</p>
+                  <p className="type-small theme-text font-semibold">{item.author}</p>
+                  <p className="type-caption theme-muted">Replace with real name & title</p>
                 </div>
               </div>
             </Card>
@@ -564,7 +676,7 @@ export function Gallery() {
   ];
   return (
     <AnimatedSection id="gallery" label="Media" title="Gallery & Reels">
-      <div className="grid auto-rows-[200px] gap-4 lg:grid-cols-4">
+      <div className="grid auto-rows-[140px] gap-2.5 sm:auto-rows-[180px] sm:gap-3 lg:grid-cols-4">
         {slots.map((s, i) => (
           <motion.div
             key={s.label}
@@ -573,14 +685,14 @@ export function Gallery() {
             whileInView="show"
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className={`relative overflow-hidden rounded-2xl border border-dashed border-white/20 bg-base-900 ${s.span}`}
+            className={`panel-soft relative overflow-hidden rounded-xl border-dashed ${s.span}`}
           >
-            <div className="flex h-full w-full flex-col items-center justify-center text-center">
+            <div className="flex h-full w-full flex-col items-center justify-center px-3 text-center">
               {s.video
-                ? <PlayCircle className="mb-2 text-accent-gold/50" size={28} />
-                : <div className="mb-2 text-2xl text-accent-gold/30">+</div>}
-              <p className="text-xs font-medium text-white/60">{s.label}</p>
-              <code className="mt-1 text-[10px] text-white/25">{s.hint}</code>
+                ? <PlayCircle className="mb-1.5 text-accent-gold/50" size={24} />
+                : <div className="mb-1.5 text-xl text-accent-gold/30">+</div>}
+              <p className="type-caption theme-muted font-medium">{s.label}</p>
+              <code className="type-caption theme-faint mt-0.5">{s.hint}</code>
             </div>
           </motion.div>
         ))}
@@ -600,20 +712,20 @@ export function Insights() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid gap-4 md:grid-cols-2"
+        className="grid gap-3 md:grid-cols-2"
       >
         {insights.map((item, i) => (
           <motion.div key={item} variants={fadeUp}>
             <Card className="group cursor-pointer">
-              <div className="mb-4 flex h-32 items-center justify-center overflow-hidden rounded-xl border border-dashed border-white/15 bg-gradient-to-br from-white/[0.03] to-accent-gold/5">
-                <p className="text-[10px] text-white/25">Featured image — media/insight-{i + 1}.jpg</p>
+              <div className="theme-border mb-3 flex h-28 items-center justify-center overflow-hidden rounded-lg border border-dashed">
+                <p className="type-caption theme-faint">Featured image — media/insight-{i + 1}.jpg</p>
               </div>
-              <p className="text-[11px] uppercase tracking-widest text-accent-gold">Article Draft</p>
-              <h3 className="mt-2 text-lg font-semibold text-white transition group-hover:text-accent-gold">{item}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-accent-smoke">
-                Add your full article or strategic perspective here — replace placeholder in <code className="text-[10px] text-white/30">content.js</code>.
+              <p className="type-label text-accent-gold">Article Draft</p>
+              <h3 className="type-h3 theme-text mt-1.5 transition group-hover:text-accent-gold">{item}</h3>
+              <p className="type-small theme-muted mt-2">
+                Add your full article or strategic perspective here — replace placeholder in <code className="type-caption theme-faint">content.js</code>.
               </p>
-              <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-accent-gold opacity-0 transition group-hover:opacity-100">
+              <span className="type-caption mt-3 inline-flex items-center gap-1 font-medium text-accent-gold opacity-0 transition group-hover:opacity-100">
                 Read more <ArrowRight size={12} />
               </span>
             </Card>
@@ -646,6 +758,11 @@ const categoryIcons = {
 export function Credentials() {
   const [active, setActive] = useState(null);
 
+  useEffect(() => {
+    document.body.style.overflow = active ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [active]);
+
   return (
     <AnimatedSection
       id="credentials"
@@ -658,7 +775,7 @@ export function Credentials() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
       >
         {credentials.map((cred) => {
           const Icon = categoryIcons[cred.category] || Award;
@@ -671,38 +788,38 @@ export function Credentials() {
               <button
                 type="button"
                 onClick={() => setActive(cred)}
-                className="group relative w-full cursor-pointer rounded-2xl border border-white/10 bg-white/[0.025] p-5 text-left shadow-soft transition-all duration-500 hover:-translate-y-1 hover:border-accent-gold/40 hover:bg-white/[0.05]"
+                className="premium-card group relative w-full cursor-pointer rounded-xl p-4 text-left transition-all duration-500 hover:-translate-y-0.5 sm:p-4"
               >
                 {/* gradient ring on hover */}
                 <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 ring-1 ring-inset ring-accent-gold/25 transition-opacity duration-500 group-hover:opacity-100" />
 
                 {/* top row */}
-                <div className="mb-4 flex items-start justify-between gap-3">
-                  <div className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border ${colorClass}`}>
-                    <Icon size={17} />
+                <div className="mb-3 flex items-start justify-between gap-2.5">
+                  <div className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border ${colorClass}`}>
+                    <Icon size={16} />
                   </div>
-                  <span className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest ${colorClass}`}>
+                  <span className={`type-caption rounded-full border px-2 py-0.5 font-semibold uppercase tracking-widest ${colorClass}`}>
                     {cred.category}
                   </span>
                 </div>
 
                 {/* cert thumbnail */}
-                <div className="mb-4 overflow-hidden rounded-xl border border-white/10">
+                <div className="theme-border mb-3 overflow-hidden rounded-lg border">
                   <img
                     src={cred.file}
                     alt={cred.title}
-                    className="h-36 w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    className="h-32 w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
                 </div>
 
-                <h3 className="text-sm font-bold text-white">{cred.title}</h3>
-                <p className="mt-0.5 text-xs font-medium text-accent-smoke">{cred.subtitle}</p>
-                <p className="mt-1 text-xs text-white/40">{cred.issuer}</p>
+                <h3 className="type-small theme-text font-bold">{cred.title}</h3>
+                <p className="type-caption theme-muted mt-0.5 font-medium">{cred.subtitle}</p>
+                <p className="type-caption theme-faint mt-0.5">{cred.issuer}</p>
 
-                <div className="mt-3 flex items-center justify-between">
-                  <span className="text-[11px] text-white/30">{cred.date}</span>
-                  <span className="flex items-center gap-1 text-[11px] font-medium text-accent-gold opacity-0 transition-opacity group-hover:opacity-100">
+                <div className="mt-2.5 flex items-center justify-between">
+                  <span className="type-caption theme-faint">{cred.date}</span>
+                  <span className="type-caption flex items-center gap-1 font-medium text-accent-gold opacity-0 transition-opacity group-hover:opacity-100">
                     View full <ExternalLink size={11} />
                   </span>
                 </div>
@@ -722,22 +839,22 @@ export function Credentials() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={() => setActive(null)}
-            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+            className="lightbox-overlay fixed inset-0 z-[200] flex items-end justify-center p-0 backdrop-blur-sm sm:items-center sm:p-4"
           >
             <motion.div
               key="lightbox-modal"
-              initial={{ opacity: 0, scale: 0.93, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.93, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-h-[92vh] w-full max-w-2xl overflow-auto rounded-2xl border border-white/15 bg-base-900 shadow-[0_32px_80px_rgba(0,0,0,0.6)]"
+              className="lightbox-modal relative max-h-[100dvh] w-full max-w-2xl overflow-auto rounded-t-2xl sm:max-h-[92vh] sm:rounded-2xl"
             >
               {/* close */}
               <button
                 type="button"
                 onClick={() => setActive(null)}
-                className="absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-base-950/80 text-white/70 backdrop-blur transition hover:border-accent-gold hover:text-accent-gold"
+                className="theme-icon-btn absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur sm:right-4 sm:top-4"
                 aria-label="Close"
               >
                 <X size={15} />
@@ -752,14 +869,14 @@ export function Credentials() {
               />
 
               {/* meta */}
-              <div className="border-t border-white/10 p-5">
+              <div className="theme-border border-t p-4 sm:p-5">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-widest text-accent-gold">{active.category}</p>
-                    <h3 className="mt-1 text-lg font-bold text-white">{active.title}</h3>
-                    <p className="text-sm text-accent-smoke">{active.subtitle}</p>
-                    <p className="mt-1 text-xs text-white/40">{active.issuer} · {active.date}</p>
-                    <p className="mt-2 text-xs text-white/55">{active.detail}</p>
+                    <p className="type-label text-accent-gold">{active.category}</p>
+                    <h3 className="type-h3 theme-text mt-1 font-bold">{active.title}</h3>
+                    <p className="type-small theme-muted">{active.subtitle}</p>
+                    <p className="type-caption theme-faint mt-0.5">{active.issuer} · {active.date}</p>
+                    <p className="type-caption theme-muted mt-2">{active.detail}</p>
                   </div>
                 </div>
               </div>
@@ -789,7 +906,7 @@ export function Tools() {
             key={tool}
             variants={fadeUp}
             whileHover={{ scale: 1.05, borderColor: "rgba(198,168,109,0.5)" }}
-            className="cursor-default rounded-full border border-white/15 bg-white/[0.025] px-4 py-2 text-sm font-medium text-white/80 transition-colors"
+            className="panel-soft type-small theme-text cursor-default rounded-full px-3.5 py-1.5 font-medium transition-colors"
           >
             {tool}
           </motion.span>
@@ -804,22 +921,20 @@ export function Tools() {
 ══════════════════════════════════ */
 export function Contact() {
   return (
-    <AnimatedSection id="contact" className="pb-32">
-      <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-accent-gold/[0.03]">
-        {/* banner */}
-        <div className="relative px-8 pb-8 pt-12 text-center">
-          <div className="pointer-events-none absolute inset-0 bg-noise opacity-60" />
-          <p className="text-xs font-medium uppercase tracking-[0.24em] text-accent-gold">Open to opportunities</p>
-          <h2 className="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Let's Grow Your Business<br />Together
+    <AnimatedSection id="contact" className="!pb-16 sm:!pb-20">
+      <div className="premium-card overflow-hidden rounded-xl sm:rounded-2xl">
+        <div className="relative px-4 pb-5 pt-8 text-center sm:px-6 sm:pb-6 sm:pt-10">
+          <p className="type-label text-accent-gold">Open to opportunities</p>
+          <h2 className="type-h2 theme-text mt-2">
+            Let's Grow Your Business<br className="hidden sm:inline" /> Together
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base text-accent-smoke">
+          <p className="type-body theme-muted mx-auto mt-3 max-w-xl">
             Whether you're launching a venture, promoting a project, or strengthening your brand, let's discuss your goals and create a winning strategy.
           </p>
         </div>
 
         {/* contact grid */}
-        <div className="grid gap-px border-t border-white/10 md:grid-cols-3">
+        <div className="theme-border grid gap-px border-t md:grid-cols-3">
           {[
             { icon: <Mail size={18} />, label: "Email", val: "islm.hr@gmail.com", href: "mailto:islm.hr@gmail.com" },
             { icon: <Linkedin size={18} />, label: "LinkedIn", val: "linkedin.com/in/morshedul-islam", href: "https://www.linkedin.com/in/morshedul-islam/" },
@@ -830,26 +945,23 @@ export function Contact() {
               href={item.href}
               target={item.href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 bg-white/[0.02] p-6 transition hover:bg-accent-gold/[0.06]"
+              className="theme-surface group flex items-center gap-3 p-3.5 transition hover:bg-accent-gold/[0.06] sm:gap-3.5 sm:p-4"
             >
-              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.03] text-accent-gold transition group-hover:border-accent-gold group-hover:bg-accent-gold/10">
+              <div className="theme-icon-btn flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border text-accent-gold transition group-hover:border-accent-gold group-hover:bg-accent-gold/10">
                 {item.icon}
               </div>
               <div>
-                <p className="text-xs text-accent-smoke">{item.label}</p>
-                <p className="text-sm font-medium text-white">{item.val}</p>
+                <p className="type-caption theme-muted">{item.label}</p>
+                <p className="type-small theme-text break-all font-medium sm:break-normal">{item.val}</p>
               </div>
             </a>
           ))}
         </div>
 
         {/* Calendly placeholder */}
-        <div className="border-t border-white/10 p-6 text-center">
-          <p className="text-xs text-accent-smoke">Calendly / booking embed goes here — replace with real link</p>
-          <a
-            href="#"
-            className="btn-premium mt-4 inline-flex"
-          >
+        <div className="theme-border border-t p-4 text-center sm:p-5">
+          <p className="type-caption theme-muted">Calendly / booking embed goes here — replace with real link</p>
+          <a href="#" className="btn-premium mt-3 inline-flex">
             Book a 30-min call <ArrowRight size={14} />
           </a>
         </div>

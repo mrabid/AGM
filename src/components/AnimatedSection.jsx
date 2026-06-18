@@ -4,26 +4,22 @@ export function AnimatedSection({ id, label, title, subtitle, children, classNam
   return (
     <motion.section
       id={id}
-      className={`mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8 ${className}`}
-      initial={{ opacity: 0, y: 28 }}
+      className={`section-wrap mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 ${className}`}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.12 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       {(label || title || subtitle) && (
-        <div className="mb-10">
+        <div className="section-head">
           {label && (
-            <p className="mb-2 text-xs font-medium uppercase tracking-[0.24em] text-accent-gold">
-              {label}
-            </p>
+            <p className="type-label text-accent-gold">{label}</p>
           )}
           {title && (
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              {title}
-            </h2>
+            <h2 className="type-h2 theme-text">{title}</h2>
           )}
           {subtitle && (
-            <p className="mt-4 max-w-2xl text-base text-accent-smoke">{subtitle}</p>
+            <p className="type-body theme-muted max-w-2xl">{subtitle}</p>
           )}
         </div>
       )}

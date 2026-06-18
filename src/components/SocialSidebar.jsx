@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { Linkedin, Mail, Phone } from "lucide-react";
 
 const links = [
-  { icon: <Linkedin size={15} />, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: <Mail size={15} />, href: "mailto:morshedulislam512@gmail.com", label: "Email" },
+  { icon: <Linkedin size={15} />, href: "https://www.linkedin.com/in/morshedul-islam/", label: "LinkedIn" },
+  { icon: <Mail size={15} />, href: "mailto:islm.hr@gmail.com", label: "Email" },
   { icon: <Phone size={15} />, href: "tel:+8801771969671", label: "Phone" },
 ];
 
@@ -15,7 +15,7 @@ export function SocialSidebar() {
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 1.2, duration: 0.6 }}
     >
-      <div className="h-16 w-px bg-gradient-to-b from-transparent to-white/20" />
+      <div className="h-16 w-px bg-gradient-to-b from-transparent to-[var(--c-border-strong)]" />
       {links.map((l) => (
         <a
           key={l.label}
@@ -23,12 +23,12 @@ export function SocialSidebar() {
           aria-label={l.label}
           target={l.href.startsWith("http") ? "_blank" : undefined}
           rel="noopener noreferrer"
-          className="group flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-accent-smoke backdrop-blur transition hover:border-accent-gold hover:text-accent-gold"
+          className="theme-icon-btn group flex h-10 w-10 items-center justify-center rounded-full border backdrop-blur transition"
         >
           {l.icon}
         </a>
       ))}
-      <div className="h-16 w-px bg-gradient-to-t from-transparent to-white/20" />
+      <div className="h-16 w-px bg-gradient-to-t from-transparent to-[var(--c-border-strong)]" />
     </motion.div>
   );
 }

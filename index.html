@@ -1,8 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "light") document.documentElement.classList.add("light");
+        } catch (e) {}
+      })();
+    </script>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta
       name="description"
       content="Business Growth Strategist. I help businesses attract more customers, increase sales, and build stronger brands through hospitality marketing, real estate campaigns, and strategic brand development."
@@ -15,7 +23,7 @@
       rel="stylesheet"
     />
   </head>
-  <body class="bg-base-950 text-base-100 antialiased">
+  <body class="antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

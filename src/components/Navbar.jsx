@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, Moon, Sun, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { navItems } from "../data/content";
 
 export function Navbar({ theme, setTheme }) {
@@ -8,19 +8,24 @@ export function Navbar({ theme, setTheme }) {
 
   const toId = (item) => item.toLowerCase().replace(/\s+/g, "-");
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-base-950/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#hero" className="text-sm font-semibold tracking-[0.24em] text-white">
+    <header className="site-header sticky top-0 z-50 border-b backdrop-blur-xl">
+      <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6 lg:px-8">
+        <a href="#hero" className="type-small theme-text shrink-0 font-semibold tracking-[0.2em]">
           M.I
         </a>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-4 lg:gap-6 md:flex">
           {navItems.map((item) => (
             <a
               key={item}
               href={`#${toId(item)}`}
-              className="text-sm text-accent-smoke transition hover:text-white"
+              className="type-small theme-muted whitespace-nowrap transition hover:text-accent-gold"
             >
               {item}
             </a>
@@ -31,42 +36,56 @@ export function Navbar({ theme, setTheme }) {
           <button
             type="button"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="rounded-full border border-white/15 p-2 text-accent-smoke transition hover:border-accent-gold hover:text-accent-gold"
+            className="theme-icon-btn flex h-10 w-10 items-center justify-center rounded-full border transition"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
           <button
             type="button"
-            className="rounded-full border border-white/15 p-2 text-accent-smoke md:hidden"
+            className="theme-icon-btn flex h-10 w-10 items-center justify-center rounded-full border md:hidden"
             onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
             aria-label="Toggle navigation"
           >
-            {open ? <X size={16} /> : <Menu size={16} />}
+            {open ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
-      {open && (
-        <motion.nav
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="border-t border-white/10 bg-base-900 px-4 py-4 md:hidden"
-        >
-          <div className="flex flex-col gap-3">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${toId(item)}`}
-                onClick={() => setOpen(false)}
-                className="text-sm text-accent-smoke transition hover:text-white"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-        </motion.nav>
-      )}
+      <AnimatePresence>
+        {open && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-40 backdrop-blur-sm md:hidden"
+              style={{ background: "var(--c-overlay)" }}
+              onClick={() => setOpen(false)}
+            />
+            <motion.nav
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              className="mobile-nav fixed inset-x-0 top-14 z-50 max-h-[calc(100dvh-3.5rem)] overflow-y-auto border-b px-4 py-4 sm:top-16 md:hidden"
+            >
+              <div className="flex flex-col gap-1">
+                {navItems.map((item) => (
+                  <a
+                    key={item}
+                    href={`#${toId(item)}`}
+                    onClick={() => setOpen(false)}
+                    className="type-body theme-muted rounded-xl px-4 py-3 font-medium transition hover:bg-accent-gold/10 hover:text-accent-gold"
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

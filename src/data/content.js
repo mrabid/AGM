@@ -67,11 +67,58 @@ export const timeline = [
 
 export const caseStudies = [
   {
-    title: "Resort Destination Marketing",
-    challenge: "Increase brand visibility and resort bookings in a competitive luxury hospitality market.",
-    strategy: "Developed comprehensive brand identity and marketing initiatives focused on customer engagement and occupancy rates.",
-    execution: "Integrated campaigns across digital marketing, content creation, and customer experience touchpoints.",
-    outcome: "Significant increase in brand awareness, customer engagement, and booking conversion rates.",
+    id: "case-01",
+    featured: true,
+    client: "Chuti Group",
+    period: "March 2024 — December 2025",
+    title: "Transforming Chuti Group into a Recognized Tourism & Investment Brand",
+    summary:
+      "Between March 2024 and December 2025, Chuti Group evolved from a largely single-property-recognized business into one of Bangladesh's emerging tourism and investment brands through strategic branding, integrated marketing, and organizational scaling.",
+    challenge:
+      "When the transformation began, Chuti Group had no dedicated branding or marketing team, limited recognition beyond Chuti Resort Gazipur, only 7 sales representatives, monthly collections averaging BDT 15 lakh, poor lead quality, and underutilized portfolio potential across multiple resorts and investment projects.",
+    strategy:
+      "Repositioned Chuti Group as a diversified tourism and investment ecosystem — not a single-property operator. Conducted market analysis, refined brand narrative, segmented audiences, and built a unified identity across hospitality and investment verticals.",
+    execution:
+      "Executed integrated ATL, BTL, and digital campaigns — TV advertising, online news portals, tourism fairs, real estate exhibitions, CSR sponsorships, and strong social media presence. Simultaneously scaled the sales force, improved lead systems, and strengthened operational capacity.",
+    outcome:
+      "Chuti Group shifted public perception from a single resort to a nationally recognized tourism, hospitality, and investment brand with multiple destinations and development projects — achieving substantial revenue, occupancy, investor, and workforce growth within 20 months.",
+    portfolio: [
+      "Chuti Resort Gazipur",
+      "Chuti Resort Purbachal",
+      "Chuti Resort Pubail",
+      "Chuti Forest Eagle Resort",
+      "Chuti Harmony",
+      "Chuti Signature",
+      "Chuti Beach Resort",
+      "Saltanat Tea Resort",
+      "Highway Village",
+    ],
+    objectives: [
+      "Establish Chuti Group as a recognized tourism and investment brand",
+      "Strengthen positioning across multiple business verticals",
+      "Increase sales performance and revenue generation",
+      "Improve awareness of the entire Chuti portfolio",
+      "Build a scalable sales and operational structure",
+      "Expand the investor base and resort occupancy",
+    ],
+    successFactors: [
+      "Clear brand positioning",
+      "Consistent multi-channel marketing",
+      "Strong digital visibility",
+      "Strategic event participation",
+      "Effective ATL and BTL integration",
+      "Organizational scalability",
+    ],
+    metrics: [
+      { label: "Monthly Sales", before: "BDT 15L", after: "BDT 10Cr", note: "Revenue growth" },
+      { label: "Resort Sales Growth", before: "90%", after: "184%", note: "Hospitality performance" },
+      { label: "Occupancy Rate", before: "40%", after: "65%", note: "Resort utilization" },
+      { label: "Investor Files", before: "180", after: "2,500+", note: "Investor acquisition" },
+      { label: "Sales Team", before: "7", after: "280", note: "Commercial scaling" },
+      { label: "Total Workforce", before: "150", after: "600+", note: "Organizational growth" },
+    ],
+    channels: ["Digital & Social Media", "ATL — TV & News Portals", "BTL — Tourism Fairs", "Real Estate Exhibitions", "CSR & Event Sponsorships"],
+    banner: "/media/case-1-banner.jpg",
   },
   {
     title: "Beachfront Property Development & Branding",
@@ -99,10 +146,12 @@ export const leadership = [
 ];
 
 export const metrics = [
-  { label: "Years of Experience", value: 10, suffix: "+" },
-  { label: "Projects Marketed", value: 15, suffix: "+" },
-  { label: "Customers Reached", value: 1000, suffix: "K+" },
-  { label: "Project Value", value: 100, suffix: "M+ BDT" },
+  { label: "Resort Sales Growth", value: 184, suffix: "%" },
+  { label: "Occupancy Rate", value: 65, suffix: "%" },
+  { label: "Investor Files", value: 2500, suffix: "+" },
+  { label: "Sales Professionals", value: 280, suffix: "" },
+  { label: "Total Workforce", value: 600, suffix: "+" },
+  { label: "Months of Transformation", value: 20, suffix: "" },
 ];
 
 export const testimonials = [
