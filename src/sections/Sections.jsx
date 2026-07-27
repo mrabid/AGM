@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import {
-  ArrowRight, Award, BarChart2, Briefcase, Download,
+  ArrowRight, Award, BarChart2, Briefcase,
   Eye, ExternalLink, GraduationCap, Layers, Linkedin,
   Mail, MessageCircle, PlayCircle, Shield, Target,
   TrendingUp, Users, X, Zap,
@@ -11,7 +11,7 @@ import {
   caseStudies, credentials, expertise, howIWork, insights, leadership,
   metrics, testimonials, timeline, tools, trustBrands,
 } from "../data/content";
-import profileImage from "../../Morshed.jpg.jpeg";
+const profileImage = "/m.png";
 
 /* ── shared helpers ── */
 const fadeUp = {
@@ -100,33 +100,30 @@ export function Hero() {
         <div className="blob blob-3" />
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-7xl gap-6 px-4 pb-12 pt-12 sm:gap-8 sm:px-6 sm:pb-14 sm:pt-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-10 lg:px-8">
+      <div className="relative mx-auto grid w-full max-w-7xl gap-6 px-4 pb-12 pt-12 sm:gap-8 sm:px-6 sm:pb-14 sm:pt-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-10 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 16 }}
+          initial={{ opacity: 0, scale: 0.98, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="relative order-first mx-auto w-full max-w-sm lg:order-last lg:max-w-none"
+          className="hero-portrait group relative order-first mx-auto w-full lg:order-last lg:self-end"
         >
-          <div className="absolute -inset-3 animate-pulse-slow rounded-[2rem] bg-gradient-to-br from-accent-gold/20 via-transparent to-accent-gold/5 blur-2xl sm:-inset-4 sm:rounded-[2.5rem]" />
-          <div className="portrait-frame relative rounded-[1.5rem] p-[1.5px] sm:rounded-[2rem]">
-            <div className="theme-elevated relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem]">
-              <img
-                src={profileImage}
-                alt="Morshedul Islam — Business Growth Strategist"
-                className="h-[300px] w-full object-cover object-top sm:h-[380px] lg:h-[460px] xl:h-[500px]"
-                loading="eager"
-              />
-              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[var(--c-bg)] to-transparent sm:h-32" />
-              <div className="theme-elevated theme-border absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2 rounded-lg border px-3 py-2 backdrop-blur-sm sm:bottom-4 sm:left-4 sm:right-4">
-                <div className="min-w-0">
-                  <p className="theme-text type-caption font-semibold truncate">Business Growth Strategist</p>
-                  <p className="theme-muted type-caption truncate">Marketing & Brand Development</p>
-                </div>
-                <span className="type-caption flex shrink-0 items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 font-medium text-emerald-400">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  Available
-                </span>
+          <img
+            src={profileImage}
+            alt="Morshedul Islam — Business Growth Strategist"
+            className="hero-portrait-img block object-contain"
+            loading="eager"
+          />
+
+          <div className="hero-portrait-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col justify-end px-1 pb-1 sm:px-2 sm:pb-2">
+            <div className="hero-portrait-caption theme-border flex items-center justify-between gap-3 rounded-xl border px-4 py-3 backdrop-blur-md">
+              <div className="min-w-0">
+                <p className="theme-text type-small font-semibold truncate">Morshedul Islam</p>
+                <p className="theme-muted type-caption truncate">Business Growth Strategist · Marketing & Brand Development</p>
               </div>
+              <span className="type-caption flex shrink-0 items-center gap-1.5 rounded-full bg-emerald-500/15 px-2.5 py-1 font-medium text-emerald-400">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+                Available
+              </span>
             </div>
           </div>
         </motion.div>

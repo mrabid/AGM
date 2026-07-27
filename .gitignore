@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Logs & caches
+*.log
+npm-debug.log*
+.DS_Store
+.vite/
+*.local
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+Thumbs.db
+.idea/
+.vscode/
+
+# Legacy duplicates (use public/ instead)
+/academic/

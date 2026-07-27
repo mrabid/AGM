@@ -4,17 +4,21 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Premium executive portfolio for branding and marketing leadership",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --host 0.0.0.0 --port 4173",
+    "start": "node scripts/start.mjs"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mrabid/AGM.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Morshedul Islam",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mrabid/AGM/issues"
@@ -24,7 +28,8 @@
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.542.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "serve": "^14.2.4"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.0.1",
@@ -32,5 +37,5 @@
     "postcss": "^8.5.14",
     "tailwindcss": "^3.4.17",
     "vite": "^8.0.11"
-  }  
+  }
 }
