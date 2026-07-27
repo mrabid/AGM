@@ -93,19 +93,19 @@ export function Hero() {
   }, []);
 
   return (
-    <section id="hero" className="relative min-h-[85vh] overflow-hidden sm:min-h-[88vh]">
+    <section id="hero" className="hero-section relative min-h-[100dvh] overflow-hidden">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="blob blob-1" />
         <div className="blob blob-2" />
         <div className="blob blob-3" />
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-7xl gap-6 px-4 pb-12 pt-12 sm:gap-8 sm:px-6 sm:pb-14 sm:pt-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-10 lg:px-8">
+      <div className="hero-grid relative mx-auto grid w-full max-w-7xl gap-5 px-4 pb-6 pt-6 sm:gap-6 sm:px-6 sm:pb-8 sm:pt-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-start lg:gap-8 lg:px-8 lg:pb-0 lg:pt-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.98, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="hero-portrait group relative order-first mx-auto w-full lg:order-last lg:self-end"
+          className="hero-portrait group relative order-first mx-auto w-full lg:order-last lg:col-start-2 lg:row-start-1 lg:self-end"
         >
           <img
             src={profileImage}
@@ -128,7 +128,7 @@ export function Hero() {
           </div>
         </motion.div>
 
-        <motion.div variants={stagger(0.12)} initial="hidden" animate="show" className="order-last lg:order-first">
+        <motion.div variants={stagger(0.12)} initial="hidden" animate="show" className="hero-copy order-last lg:order-first lg:col-start-1 lg:row-start-1 lg:self-start lg:pt-1 xl:pt-3">
           <motion.p variants={fadeUp} className="type-label inline-flex items-center gap-2 rounded-full border border-accent-gold/30 bg-accent-gold/10 px-3 py-1 text-accent-gold">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent-gold" />
             Business Growth & Marketing Strategy

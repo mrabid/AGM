@@ -446,52 +446,81 @@ html.light ::-webkit-scrollbar-thumb { background: rgba(56, 120, 210, 0.35); }
   70% { transform: translate(18px, -15px) scale(0.96); }
 }
 
+/* Hero section layout */
+.hero-section {
+  min-height: 100dvh;
+}
+
+.hero-grid {
+  min-height: calc(100dvh - 3.5rem);
+}
+
+@media (min-width: 1024px) {
+  .hero-grid {
+    min-height: calc(100dvh - 4rem);
+    align-content: start;
+  }
+
+  .hero-copy {
+    padding-top: 0.25rem;
+    max-width: 36rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-copy {
+    padding-top: 0.75rem;
+  }
+}
+
 /* Hero portrait — full PNG, hover reveal */
 .hero-portrait {
   cursor: default;
   isolation: isolate;
   display: flex;
   justify-content: center;
+  align-items: flex-end;
 }
 
 @media (min-width: 1024px) {
   .hero-portrait {
     justify-content: flex-end;
+    align-items: flex-end;
     margin-left: auto;
-    margin-right: -1.25rem;
-    padding-right: 0.25rem;
+    margin-right: -1.5rem;
+    padding-right: 0;
     width: 100%;
+    min-height: calc(100dvh - 4rem);
   }
 }
 
 @media (min-width: 1280px) {
   .hero-portrait {
-    margin-right: -1.75rem;
-    padding-right: 0.5rem;
+    margin-right: -2rem;
   }
 }
 
 .hero-portrait-img {
   width: auto;
-  height: auto;
-  max-width: min(100%, 22rem);
-  max-height: min(74vh, 38rem);
+  height: min(88vh, calc(100dvh - 5rem));
+  max-width: 100%;
   margin-inline: auto;
+  object-fit: contain;
+  object-position: bottom center;
   transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
   filter: drop-shadow(0 20px 48px rgba(0, 0, 0, 0.28));
 }
 
 @media (min-width: 640px) {
   .hero-portrait-img {
-    max-width: 24rem;
-    max-height: min(70vh, 40rem);
+    height: min(92vh, calc(100dvh - 4rem));
   }
 }
 
 @media (min-width: 1024px) {
   .hero-portrait-img {
-    max-width: 25rem;
-    max-height: min(80vh, 46rem);
+    height: calc(100dvh - 3.5rem);
+    max-height: none;
     margin-inline: 0;
     margin-left: auto;
   }
@@ -499,8 +528,7 @@ html.light ::-webkit-scrollbar-thumb { background: rgba(56, 120, 210, 0.35); }
 
 @media (min-width: 1280px) {
   .hero-portrait-img {
-    max-width: 28rem;
-    max-height: min(84vh, 48rem);
+    height: calc(100dvh - 3rem);
   }
 }
 
