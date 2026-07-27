@@ -474,8 +474,8 @@ html.light ::-webkit-scrollbar-thumb { background: rgba(56, 120, 210, 0.35); }
 .hero-portrait-img {
   width: auto;
   height: auto;
-  max-width: min(100%, 17rem);
-  max-height: min(58vh, 28rem);
+  max-width: min(100%, 21rem);
+  max-height: min(72vh, 36rem);
   margin-inline: auto;
   transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
   filter: drop-shadow(0 20px 48px rgba(0, 0, 0, 0.28));
@@ -483,15 +483,15 @@ html.light ::-webkit-scrollbar-thumb { background: rgba(56, 120, 210, 0.35); }
 
 @media (min-width: 640px) {
   .hero-portrait-img {
-    max-width: 19rem;
-    max-height: min(62vh, 32rem);
+    max-width: 23rem;
+    max-height: min(68vh, 38rem);
   }
 }
 
 @media (min-width: 1024px) {
   .hero-portrait-img {
-    max-width: 20rem;
-    max-height: min(72vh, 38rem);
+    max-width: 24rem;
+    max-height: min(78vh, 44rem);
     margin-inline: 0;
     margin-left: auto;
   }
@@ -499,8 +499,8 @@ html.light ::-webkit-scrollbar-thumb { background: rgba(56, 120, 210, 0.35); }
 
 @media (min-width: 1280px) {
   .hero-portrait-img {
-    max-width: 21rem;
-    max-height: min(75vh, 40rem);
+    max-width: 26rem;
+    max-height: min(82vh, 46rem);
   }
 }
 
