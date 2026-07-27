@@ -115,9 +115,8 @@ export function Hero() {
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent-gold" />
                 Brand & Marketing Strategist
               </p>
-              <h1 className="type-hero hero-headline theme-text">
-                I Build Brands from Scratch
-                <br />
+              <h1 className="hero-headline theme-text">
+                I Build Brands from Scratch{" "}
                 <span className="text-gradient">That People Remember</span>
               </h1>
             </motion.div>
