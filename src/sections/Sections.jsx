@@ -84,96 +84,108 @@ function AnimatedNumber({ target, suffix }) {
    HERO
 ══════════════════════════════════ */
 export function Hero() {
-  const roles = ["Business Growth Strategist", "Marketing Leader", "Brand Developer"];
-  const [roleIdx, setRoleIdx] = useState(0);
-
-  useEffect(() => {
-    const t = setInterval(() => setRoleIdx((i) => (i + 1) % roles.length), 2800);
-    return () => clearInterval(t);
-  }, []);
+  const expertiseTags = [
+    "Brand Strategy",
+    "Digital Marketing",
+    "Hospitality & Tourism",
+    "Real Estate Marketing",
+    "Business Growth",
+    "10+ Years Experience",
+  ];
 
   return (
-    <section id="hero" className="hero-section relative min-h-[100dvh] overflow-hidden">
+    <section id="hero" className="hero-section relative overflow-hidden">
+      <div aria-hidden="true" className="hero-section-glow pointer-events-none absolute inset-0" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="blob blob-1" />
         <div className="blob blob-2" />
         <div className="blob blob-3" />
       </div>
 
-      <div className="hero-grid relative mx-auto grid w-full max-w-7xl gap-5 px-4 pb-6 pt-6 sm:gap-6 sm:px-6 sm:pb-8 sm:pt-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-start lg:gap-8 lg:px-8 lg:pb-0 lg:pt-6">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98, y: 16 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="hero-portrait group relative order-first mx-auto w-full lg:order-last lg:col-start-2 lg:row-start-1 lg:self-end"
-        >
-          <img
-            src={profileImage}
-            alt="Morshedul Islam — Business Growth Strategist"
-            className="hero-portrait-img block object-contain"
-            loading="eager"
-          />
+      <div className="hero-shell relative mx-auto w-full">
+        <div className="hero-grid">
+          <motion.div
+            variants={stagger(0.08)}
+            initial="hidden"
+            animate="show"
+            className="hero-copy order-last lg:order-none"
+          >
+            <motion.div variants={fadeUp} className="hero-copy-head">
+              <p className="type-label inline-flex items-center gap-2 rounded-full border border-accent-gold/30 bg-accent-gold/10 px-3 py-1 text-accent-gold">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent-gold" />
+                Brand & Marketing Strategist
+              </p>
+              <h1 className="type-hero hero-headline theme-text">
+                I Build Brands from Scratch
+                <br />
+                <span className="text-gradient">That People Remember</span>
+              </h1>
+            </motion.div>
 
-          <div className="hero-portrait-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col justify-end px-1 pb-1 sm:px-2 sm:pb-2">
-            <div className="hero-portrait-caption theme-border flex items-center justify-between gap-3 rounded-xl border px-4 py-3 backdrop-blur-md">
-              <div className="min-w-0">
-                <p className="theme-text type-small font-semibold truncate">Morshedul Islam</p>
-                <p className="theme-muted type-caption truncate">Business Growth Strategist · Marketing & Brand Development</p>
+            <motion.div variants={fadeUp} className="hero-intro-panel">
+              <p className="hero-lead theme-muted">
+                As a Brand & Marketing Strategist, I help organizations build strong brand identities, launch impactful campaigns, and develop marketing systems that generate long-term growth.
+              </p>
+              <p className="hero-lead theme-muted mt-3 sm:mt-3.5">
+                Whether you&apos;re launching a new brand, repositioning an existing business, or scaling your marketing efforts, I provide strategic direction backed by real-world experience.
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="hero-tags">
+              {expertiseTags.map((t) => (
+                <span key={t} className="hero-tag type-caption theme-muted">{t}</span>
+              ))}
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="hero-cta">
+              <a href="#case-studies" className="btn-premium group w-full sm:w-auto">
+                View My Work
+                <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+              </a>
+              <a href="#contact" className="btn-secondary w-full sm:w-auto">
+                <MessageCircle size={15} /> Let&apos;s Talk
+              </a>
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="hero-body-panel">
+              <p className="hero-body-text theme-muted">
+                I partner with ambitious businesses to build strong brands, craft high-impact marketing strategies, and accelerate sustainable growth.
+              </p>
+              <p className="hero-body-text theme-muted mt-3 sm:mt-3.5">
+                With 10+ years of experience across hospitality, tourism, real estate, and corporate sectors, I turn business goals into measurable marketing success through branding, storytelling, and performance-driven execution.
+              </p>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="hero-portrait-col order-first lg:order-none"
+          >
+            <div className="hero-portrait group relative">
+              <div aria-hidden="true" className="hero-portrait-floor" />
+              <img
+                src={profileImage}
+                alt="Morshedul Islam — Brand & Marketing Strategist"
+                className="hero-portrait-img"
+                loading="eager"
+              />
+              <div className="hero-portrait-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col justify-end">
+                <div className="hero-portrait-caption theme-border flex items-center justify-between gap-3 rounded-xl border px-4 py-3 backdrop-blur-md">
+                  <div className="min-w-0">
+                    <p className="theme-text type-small font-semibold truncate">Morshedul Islam</p>
+                    <p className="theme-muted type-caption truncate">Brand & Marketing Strategist</p>
+                  </div>
+                  <span className="type-caption flex shrink-0 items-center gap-1.5 rounded-full bg-emerald-500/15 px-2.5 py-1 font-medium text-emerald-400">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+                    Available
+                  </span>
+                </div>
               </div>
-              <span className="type-caption flex shrink-0 items-center gap-1.5 rounded-full bg-emerald-500/15 px-2.5 py-1 font-medium text-emerald-400">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-                Available
-              </span>
             </div>
-          </div>
-        </motion.div>
-
-        <motion.div variants={stagger(0.12)} initial="hidden" animate="show" className="hero-copy order-last lg:order-first lg:col-start-1 lg:row-start-1 lg:self-start lg:pt-1 xl:pt-3">
-          <motion.p variants={fadeUp} className="type-label inline-flex items-center gap-2 rounded-full border border-accent-gold/30 bg-accent-gold/10 px-3 py-1 text-accent-gold">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent-gold" />
-            Business Growth & Marketing Strategy
-          </motion.p>
-
-          <motion.h1 variants={fadeUp} className="type-hero theme-text mt-3">
-            Help Businesses
-            <br />
-            <span className="text-gradient">Grow & Thrive</span>
-          </motion.h1>
-
-          <motion.div variants={fadeUp} className="theme-muted mt-2.5 flex items-center gap-2 sm:mt-3">
-            <span className="h-px w-5 shrink-0 bg-accent-gold sm:w-6" />
-            <motion.span
-              key={roleIdx}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.4 }}
-              className="type-role theme-text font-medium"
-            >
-              {roles[roleIdx]}
-            </motion.span>
           </motion.div>
-
-          <motion.p variants={fadeUp} className="type-body theme-muted mt-3 max-w-lg sm:mt-4">
-            With years of experience in hospitality, tourism, real estate, and digital marketing, I help businesses attract more customers, increase sales, and build stronger brands that generate measurable results.
-          </motion.p>
-
-          <motion.div variants={fadeUp} className="theme-muted mt-3 flex flex-wrap gap-1.5 sm:mt-4">
-            {["Hospitality & Resort Marketing", "Real Estate Strategy", "10+ Years Experience"].map((t) => (
-              <span key={t} className="type-caption panel-soft rounded-full px-2.5 py-1">{t}</span>
-            ))}
-          </motion.div>
-
-          <motion.div variants={fadeUp} className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
-            <a href="#case-studies" className="btn-premium group w-full sm:w-auto">
-              View My Work
-              <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-            </a>
-            <a href="#contact" className="btn-secondary w-full sm:w-auto">
-              <MessageCircle size={15} /> Let's Talk
-            </a>
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

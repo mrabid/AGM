@@ -15,7 +15,7 @@ export function Navbar({ theme, setTheme }) {
 
   return (
     <header className="site-header sticky top-0 z-50 border-b backdrop-blur-xl">
-      <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-14 w-full max-w-[90rem] items-center justify-between gap-3 px-5 sm:h-16 sm:px-6 lg:px-10 xl:px-12">
         <a href="#hero" className="type-small theme-text shrink-0 font-semibold tracking-[0.2em]">
           M.I
         </a>
