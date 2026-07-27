@@ -36,12 +36,22 @@ function resolveFile(urlPath) {
     return filePath;
   }
 
+  const ext = extname(safePath);
+  if (ext && ext !== ".html") {
+    return null;
+  }
+
   return join(dist, "index.html");
 }
 
 const server = createServer((req, res) => {
   try {
     const filePath = resolveFile(req.url || "/");
+    if (!filePath) {
+      res.writeHead(404, { "Content-Type": "text/plain" });
+      res.end("Not Found");
+      return;
+    }
     const data = readFileSync(filePath);
     const type = MIME[extname(filePath)] || "application/octet-stream";
 
